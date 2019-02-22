@@ -15,4 +15,12 @@
 6、插入排序若要排序一个随机顺序的数组（keys不重复），需要大约1/4 N平方次比较和大约约1/4 N平方次交换。最好情况即数组是有序的情况下，需要N-1次比较和0次交换；最差情况下及数组是逆序的情况下，需要1/2 N平方次比较和1/2 N平方次交换。  
 7、若一个数组逆序对的数量<=cN，那么，我们称它是部分有序数组，对于部分有序数组而言，插入排序运行时间是线性的，因为，交换次数等于逆序对的数量，比较次数等于交换次数+N-1。    
 8、逆序对(inversion)是a pair of keys that are out of order. 比如：A E E L M O T R X P S中，有T-R T-P T-S R-P X-P X-S共6个逆序对。  
-9、排序算法的目标就是将数组元素的主键按照某种方式排列，其中，元素和主键的具体性质在不同的应用中均有差别，在java中，元素通常都是对象，对主键的抽象描述则是通过Comparable接口实现的，具体来说，是该接口中的compareTo方法，该方法定义了对象的自然次序。
+9、排序算法的目标就是将数组元素的主键按照某种方式排列，其中，元素和主键的具体性质在不同的应用中均有差别，在java中，元素通常都是对象，对主键的抽象描述则是通过Comparable接口实现的，具体来说，是该接口中的compareTo方法，该方法定义了对象的自然次序。  
+10、如何实现非易变(immutable)数据类型？非易变数据类型是指一旦创建就无法改变数据类型的值的类型。它的优势有：  
++ 简化调试
++ 在有恶意代码攻击时更安全
++ 简化并发编程
++ 可以在优先级队列或符号表中作为key使用  
+immutable数据类型的唯一劣势就是对于每个数据类型值必须创建一个new object。
+要实现immutable，我们需要对传入构造函数的input进行copy，在data type里面创建一个private final instance variable持有这个copy，同时实例方法不改变这个私有实例变量。  
+java中有许多immutable数据类型，比如String,Integer,Double,Color,Vector,Transaction,Point2D.同时也有许多Mutable数据类型，比如StringBuilder,Stack,Counter,Java array。
