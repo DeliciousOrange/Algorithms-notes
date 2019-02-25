@@ -1,3 +1,8 @@
+/**
+ *   Usingourimplementationofequals()inDateasamodel(page103),develop implementations
+ *   of equals() for Transaction. 
+ */
+
 import edu.princeton.cs.algs4.Date;
 
 public class Transaction {
