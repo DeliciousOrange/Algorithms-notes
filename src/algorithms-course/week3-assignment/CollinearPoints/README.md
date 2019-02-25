@@ -1,4 +1,4 @@
-# Percolation
+# CollinearPoints
 
 数据类型里面定义的toString()方法一般用于调试目的，具体的代码逻辑不要依赖于它的某个形式表示。
 
