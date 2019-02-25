@@ -14,7 +14,7 @@ import edu.princeton.cs.algs4.StdOut;
 
 import java.util.Iterator;
 
-// 本实现是未使用哨兵节点的版本，写起来较麻烦且易出bug，可考虑写带哨兵节点的改进版本
+// 带哨兵节点的改进版本
 public class Deque<Item> implements Iterable<Item> {
     private DoubleNode first;
     private DoubleNode last;
