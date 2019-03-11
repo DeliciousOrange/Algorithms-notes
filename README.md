@@ -23,11 +23,11 @@
 + 可以在优先级队列或符号表中作为key使用  
 immutable数据类型的唯一劣势就是对于每个数据类型值必须创建一个new object。
 要实现immutable，我们需要对传入构造函数的input进行copy，在data type里面创建一个private final instance variable持有这个copy，同时实例方法不改变这个私有实例变量。  
-java中有许多immutable数据类型，比如String,Integer,Double,Color,Vector,Transaction,Point2D.同时也有许多Mutable数据类型，比如StringBuilder,Stack,Counter,Java array。
+java中有许多immutable数据类型，比如String,Integer,Double,Color,Vector,Transaction,Point2D.同时也有许多Mutable数据类型，比如StringBuilder,Stack,Counter,Java array。  
 11、使用equals和compareTo作为key比较的interface有什么区别？  
 算法第四版的算法3.1 SequentialSearchST class使用的是equals方法，而其余的符号表的实现均使用compareTo方法作为key interface。  
 我们选择两者其一的依据是我们为解决问题选择的数据结构。equals方法告诉我们两个对象是否严格相等(这是可由我们重写默认的equals方法控制的)。而comparable interface使我们得知两个元素的相对顺序，要么大于，要么小于，要么等于。  
 顺序搜索意味着迭代整个元素集合，其中我们只保留那些等于某个键的元素。它们是否小于或大于键并不重要，我们只寻找那些相等的，并检查每个元素。虽然提供这种API的泛型集合可以使用compareTo()，并且只过滤与key相比等于0的元素，但是最好使用为相等测试而设计的equals方法。  
 技术上来说，equals和compareTo在进行equality tests时能进行互换，但通常不这样做。  
 然而，若我们使用像树Tree这样的数据结构，那么我们需要使用compareTo方法，因为元素之间的order在search和insert时是重要的。  
-正是compareTo方法给出的元素之间的相对order使得我们得以避免顺序搜索。**顺序搜索就是迭代整个集合**在使用Tree结构,
+正是compareTo方法给出的元素之间的相对order使得我们得以避免顺序搜索。**顺序搜索就是迭代整个集合**在使用Tree结构,不能使用equals替代compareTo方法。
