@@ -24,3 +24,231 @@
 immutable数据类型的唯一劣势就是对于每个数据类型值必须创建一个new object。
 要实现immutable，我们需要对传入构造函数的input进行copy，在data type里面创建一个private final instance variable持有这个copy，同时实例方法不改变这个私有实例变量。  
 java中有许多immutable数据类型，比如String,Integer,Double,Color,Vector,Transaction,Point2D.同时也有许多Mutable数据类型，比如StringBuilder,Stack,Counter,Java array。
+
+public class BST<Key extends Comparable<Key>, Value> {
+    public Node root;
+
+    private class Node {
+        private Key key;
+        private Value val;
+        private Node left;
+        private Node right;
+
+        // private int N;
+        // private int n;
+        // private int len;
+        public Node(Key key, Value val) {
+            this.key = key;
+            this.val = val;
+            // this.N = N;
+            // this.n = n;
+            // this.len = len;
+        }
+        // public Node(Key key, Value val, int n, int len) {
+        //     this.key = key;
+        //     this.val = val;
+        //     // this.N = N;
+        //     // this.n = n;
+        //     // this.len = len;
+        // }
+    }
+
+    // public int height() {
+    //     return height(root);
+    // }
+    //
+    // private int height(Node x) {
+    //     if (x == null) {
+    //         return 0;
+    //     }
+    //     else {
+    //         return x.n;
+    //     }
+    // }
+
+    public Key min() {
+        return min(root).key;
+    }
+
+    private Node min(Node root) {
+        if (root == null) {
+            return null;
+        }
+        Node x = root.left;
+        Node y = root;
+        while (x != null) {
+            x = x.left;
+            y = y.left;
+        }
+        return y;
+    }
+
+    // public Key floor(Key key) {
+    //     Node x = floor(root, key);
+    //     if (x == null) {
+    //         return null;
+    //     }
+    //     return x.key;
+    // }
+
+    // private Node floor(Node x, Key key) {
+    //
+    // }
+
+    public Value get(Key key) {
+        return get(root, key);
+    }
+
+    private Value get(Node root, Key key) {
+        Node x = root;
+        while (x != null) {
+            int cmp = key.compareTo(x.key);
+            if (cmp < 0) {
+                x = x.left;
+            }
+            else if (cmp > 0) {
+                x = x.right;
+            }
+            else {
+                return x.val;
+            }
+        }
+        return null;
+    }
+
+    public void put(Key key, Value val) {
+        root = put(root, key, val);
+    }
+
+    private Node put(Node root, Key key, Value val) {
+        Node x = root;
+        Node newNode = new Node(key, val);
+        while (x != null) {
+            int cmp = key.compareTo(x.key);
+            if (cmp < 0) {
+                if (x.left == null) {
+                    x.left = newNode;
+                    break;
+                }
+                x = x.left;
+            }
+            else if (cmp > 0) {
+                if (x.right == null) {
+                    x.right = newNode;
+                    break;
+                }
+                x = x.right;
+            }
+            else {
+                break;
+            }
+        }
+        if (x==null){
+            return newNode;
+        }
+        return root;
+    }
+    // private Node put(Node root, Key key, Value val) {
+    //     Node x = root;
+    //     Stack<Node> stack = new Stack<Node>();
+    //     while (x != null) {
+    //         int cmp = key.compareTo(x.key);
+    //         if (cmp < 0) {
+    //             stack.push(x);
+    //             x = x.left;
+    //         }
+    //         else if (cmp > 0) {
+    //             stack.push(x);
+    //             x = x.right;
+    //         }
+    //         else {
+    //             stack.push(x);
+    //             break;
+    //         }
+    //     }
+    //     Node newNode = new Node(key, val);
+    //     if (stack.isEmpty()) {
+    //         return newNode;
+    //     }
+    //     else {
+    //         Node y = stack.peek();
+    //         if (key.compareTo(y.key) > 0) {
+    //             y.right = newNode;
+    //         }
+    //         else if (key.compareTo(y.key) < 0) {
+    //             y.left = newNode;
+    //         }
+    //         else {
+    //             y.val = newNode.val;
+    //         }
+    //         return root;
+    //     }
+    // }
+    // private Node put(Node x, int len, Key key, Value val) {
+    //     if (x == null) {
+    //         return new Node(key, val, 0, len);
+    //     }
+    //     int cmp = key.compareTo(x.key);
+    //     if (cmp > 0) {
+    //         x.right = put(x.right, len + 1, key, val);
+    //     }
+    //     else if (cmp < 0) {
+    //         x.left = put(x.left, len + 1, key, val);
+    //     }
+    //     else {
+    //         x.val = val;
+    //     }
+    //     x.n = Math.max(height(x.left), height(x.right)) + 1;
+    //     return x;
+    // }
+
+    // public int avgCompares() {
+    //     int pathLengthSum = avgCompares(root);
+    //     return pathLengthSum / height() +1;
+    // }
+
+    // private int avgCompares(Node x) {
+    //     int len = 0;
+    //     if (x == null) {
+    //         return 0;
+    //     }
+    //     if (x.left != null) {
+    //         len += avgCompares(x.left);
+    //     }
+    //     len += x.len;
+    //     len += avgCompares(x.right);
+    //     return len;
+    // }
+
+    // public int avgCompares() {
+    //     int pathLengthSum = avgCompares(root, 0);
+    //     return pathLengthSum / height() + 1;
+    // }
+    //
+    // public int avgCompares(Node x, int deep) {
+    //     int len = 0;
+    //     if (x == null) {
+    //         return 0;
+    //     }
+    //     if (x.left != null) {
+    //         len += avgCompares(x.left, deep + 1);
+    //     }
+    //     len += deep;
+    //     len += avgCompares(x.right, deep + 1);
+    //     return len;
+    // }
+
+    public static void main(String[] args) {
+        BST<Integer, String> bst = new BST<Integer, String>();
+        bst.put(4, "h");
+        bst.put(1, "e");
+        bst.put(6, "l");
+        bst.put(5, "l");
+        bst.put(7, "o");
+        // System.out.println(bst.height());
+        System.out.println("--------");
+        // System.out.println(bst.avgCompares());
+        // System.out.println(bst.avgCompares());
+        System.out.println(bst.min());
+    }
+}
