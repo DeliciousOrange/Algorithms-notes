@@ -31,4 +31,4 @@ java中有许多immutable数据类型，比如String,Integer,Double,Color,Vector
 顺序搜索意味着迭代整个元素集合，其中我们只保留那些等于某个键的元素。它们是否小于或大于键并不重要，我们只寻找那些相等的，并检查每个元素。虽然提供这种API的泛型集合可以使用compareTo()，并且只过滤与key相比等于0的元素，但是最好使用为相等测试而设计的equals方法。  
 技术上来说，equals和compareTo在进行equality tests时能进行互换，但通常不这样做。  
 然而，若我们使用像树Tree这样的数据结构，那么我们需要使用compareTo方法，因为元素之间的order在search和insert时是重要的。  
-正是compareTo方法给出的元素之间的相对order使得我们得以避免顺序搜索。**顺序搜索就是迭代整个集合。**在使用Tree结构,不能使用equals替代compareTo方法。
+正是compareTo方法给出的元素之间的相对order使得我们得以避免顺序搜索。**顺序搜索就是迭代整个集合**。在使用Tree结构,不能使用equals替代compareTo方法。
